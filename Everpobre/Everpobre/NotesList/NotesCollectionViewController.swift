@@ -10,10 +10,11 @@ import UIKit
 import CoreData
 
 class NotesCollectionViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var collectionView: UICollectionView!
     
+    // MARK: - Properties
     let notebook: Notebook
-    //let managedContext: NSManagedObjectContext
     let coreDataStack: CoreDataStack
     
     var notes: [Note] = [] {
@@ -24,6 +25,7 @@ class NotesCollectionViewController: UIViewController {
     
     let transition = Animator()
 
+    // MARK: - Initialization
     init(notebook: Notebook, coreDataStack: CoreDataStack) {
         self.notebook = notebook
         self.notes = (notebook.notes?.array as? [Note]) ?? []
@@ -35,6 +37,7 @@ class NotesCollectionViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +54,7 @@ class NotesCollectionViewController: UIViewController {
         setupCollectionView()
     }
     
+    // MARK: - Helper methods
     @objc private func addNote() {
         let newNoteVC = NoteDetailsViewController(action: .new(notebook), managedContext: coreDataStack.managedContext)
         let navVC = UINavigationController(rootViewController: newNoteVC)
@@ -105,10 +109,6 @@ class NotesCollectionViewController: UIViewController {
             } else {
                 print("Error al exportar")
             }
-            
-            
-            
-            
         }
     }
     
@@ -131,6 +131,7 @@ class NotesCollectionViewController: UIViewController {
     }
 }
 
+// MARK: - CollectionView
 extension NotesCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return notes.count
@@ -161,12 +162,14 @@ extension NotesCollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - NoteDetailsViewControllerDelegate
 extension NotesCollectionViewController: NoteDetailsViewControllerDelegate {
     func didChangeNote() {
         self.notes = (notebook.notes?.array as? [Note]) ?? []
     }
 }
 
+// MARK: - Animation
 extension NotesCollectionViewController: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil

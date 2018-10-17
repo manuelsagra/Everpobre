@@ -14,6 +14,7 @@ protocol NoteDetailsViewControllerDelegate: class {
 }
 
 class NoteDetailsViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var tagsLabel: UILabel!
@@ -21,6 +22,7 @@ class NoteDetailsViewController: UIViewController {
     @IBOutlet weak var lastSeenDateLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
+    // MARK: - Properties
     enum Action {
         case new(Notebook)
         case edit(Note)
@@ -31,6 +33,7 @@ class NoteDetailsViewController: UIViewController {
     
     weak var delegate: NoteDetailsViewControllerDelegate?
     
+    // MARK: - Initialization
     init(action: Action, managedContext: NSManagedObjectContext) {
         self.action = action
         self.managedContext = managedContext
@@ -41,11 +44,13 @@ class NoteDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
     
+    // MARK: - Helper Methods
     private func configure() {
         switch action {
         case .new:
@@ -129,6 +134,7 @@ class NoteDetailsViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Image picking
     @IBAction func pickImage(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             showPhotoMenu()
@@ -169,6 +175,7 @@ class NoteDetailsViewController: UIViewController {
     }
 }
 
+// MARK: - Custom Action
 private extension NoteDetailsViewController.Action {
     var note: Note? {
         guard case let .edit(note) = self else { return nil }
@@ -186,6 +193,7 @@ private extension NoteDetailsViewController.Action {
     }
 }
 
+// MARK: - Image Resizing
 extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)

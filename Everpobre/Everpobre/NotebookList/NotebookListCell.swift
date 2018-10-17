@@ -9,10 +9,11 @@
 import UIKit
 
 class NotebookListCell: UITableViewCell {
-    
+    // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
     
+    // MARK: - Functions
     override func prepareForReuse() {
         titleLabel.text = nil
         creationDateLabel.text = nil

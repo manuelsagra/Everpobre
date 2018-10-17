@@ -9,13 +9,15 @@
 import UIKit
 
 class NotesCollectionViewCell: UICollectionViewCell {
-    
+    // MARK: - Outlets
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
+    // MARK: - Properties
     var item: Note!
     
+    // MARK: - Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
     }

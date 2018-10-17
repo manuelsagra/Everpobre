@@ -30,9 +30,6 @@
 		32E6D540216BEFF0004A24F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E6D53E216BEFF0004A24F7 /* LaunchScreen.storyboard */; };
 		32E6D549216BF1F7004A24F7 /* NotebookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D548216BF1F7004A24F7 /* NotebookListViewController.swift */; };
 		32E6D54B216BFB05004A24F7 /* NotebookListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D54A216BFB05004A24F7 /* NotebookListCell.swift */; };
-		32E6D54E216BFC81004A24F7 /* _Notebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D54D216BFC81004A24F7 /* _Notebook.swift */; };
-		32E6D550216C02B4004A24F7 /* _Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D54F216C02B4004A24F7 /* _Note.swift */; };
-		32E6D553216C039C004A24F7 /* NoteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D552216C039C004A24F7 /* NoteListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,9 +59,6 @@
 		32E6D541216BEFF0004A24F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		32E6D548216BF1F7004A24F7 /* NotebookListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookListViewController.swift; sourceTree = "<group>"; };
 		32E6D54A216BFB05004A24F7 /* NotebookListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotebookListCell.swift; sourceTree = "<group>"; };
-		32E6D54D216BFC81004A24F7 /* _Notebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Notebook.swift; sourceTree = "<group>"; };
-		32E6D54F216C02B4004A24F7 /* _Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Note.swift; sourceTree = "<group>"; };
-		32E6D552216C039C004A24F7 /* NoteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +144,6 @@
 				329330C421751C380043C760 /* Notebook+CoreDataProperties.swift */,
 				329330C521751C380043C760 /* Note+CoreDataClass.swift */,
 				329330C621751C380043C760 /* Note+CoreDataProperties.swift */,
-				32E6D54D216BFC81004A24F7 /* _Notebook.swift */,
-				32E6D54F216C02B4004A24F7 /* _Note.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,7 +151,6 @@
 		32E6D551216C037D004A24F7 /* NotesList */ = {
 			isa = PBXGroup;
 			children = (
-				32E6D552216C039C004A24F7 /* NoteListViewController.swift */,
 				329330BA216FFE630043C760 /* NotesCollectionViewController.swift */,
 				329330BB216FFE630043C760 /* NotesCollectionViewController.xib */,
 				329330BE2170019C0043C760 /* NotesCollectionViewCell.swift */,
@@ -246,7 +237,6 @@
 				32E6D549216BF1F7004A24F7 /* NotebookListViewController.swift in Sources */,
 				3293309F216D2FB50043C760 /* Date+Utils.swift in Sources */,
 				329330BC216FFE630043C760 /* NotesCollectionViewController.swift in Sources */,
-				32E6D553216C039C004A24F7 /* NoteListViewController.swift in Sources */,
 				329330C821751C380043C760 /* Notebook+CoreDataProperties.swift in Sources */,
 				32E6D533216BEFED004A24F7 /* AppDelegate.swift in Sources */,
 				329330C02170019C0043C760 /* NotesCollectionViewCell.swift in Sources */,
@@ -260,8 +250,6 @@
 				329330C721751C380043C760 /* Notebook+CoreDataClass.swift in Sources */,
 				324C755721753BCC008915A4 /* UIImage+Alpha.swift in Sources */,
 				329330C921751C380043C760 /* Note+CoreDataClass.swift in Sources */,
-				32E6D54E216BFC81004A24F7 /* _Notebook.swift in Sources */,
-				32E6D550216C02B4004A24F7 /* _Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

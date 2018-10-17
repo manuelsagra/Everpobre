@@ -10,14 +10,15 @@ import UIKit
 import CoreData
 
 class NotebookListViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
     
-    //var managedContext: NSManagedObjectContext!
+    // MARK: - Properties
     var coreDataStack: CoreDataStack!
-    
     private var fetchedResultsController: NSFetchedResultsController<Notebook>!
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +26,7 @@ class NotebookListViewController: UIViewController {
         reloadView()
     }
     
+    // MARK: - Core Data
     private func getFetchedResultsController(with predicate: NSPredicate = NSPredicate(value: true)) -> NSFetchedResultsController<Notebook> {
         let fetchRequest: NSFetchRequest<Notebook> = Notebook.fetchRequest()
         fetchRequest.predicate = predicate
@@ -54,6 +56,7 @@ class NotebookListViewController: UIViewController {
         }
     }
     
+    // MARK: - Helper methods
     private func configureSearchController() {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
@@ -108,7 +111,7 @@ class NotebookListViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource Implementation
+// MARK: - TableView
 extension NotebookListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let sections = fetchedResultsController.sections else { return 1 }
@@ -160,6 +163,7 @@ extension NotebookListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - Search
 extension NotebookListViewController:UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let text = searchController.searchBar.text, !text.isEmpty {
@@ -178,6 +182,7 @@ extension NotebookListViewController:UISearchResultsUpdating {
     }
 }
 
+// MARK: - FetchedResultsControllerDelegate
 extension NotebookListViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
