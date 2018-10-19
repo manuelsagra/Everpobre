@@ -158,8 +158,8 @@ extension NotebookListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let notebook = fetchedResultsController.object(at: indexPath)
-        let noteListVC = NotesCollectionViewController(notebook: notebook, coreDataStack: coreDataStack)
-        self.navigationController?.pushViewController(noteListVC, animated: true)
+        let tabBarVC = NotesTabBarController(notebook: notebook, coreDataStack: coreDataStack)
+        self.navigationController?.pushViewController(tabBarVC, animated: true)
     }
 }
 

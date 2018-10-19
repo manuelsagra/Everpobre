@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 protocol NoteDetailsViewControllerDelegate: class {
     func didChangeNote()
@@ -17,7 +18,6 @@ class NoteDetailsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var lastSeenDateLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
@@ -31,6 +31,7 @@ class NoteDetailsViewController: UIViewController {
     let managedContext: NSManagedObjectContext
     let action: Action
     
+    var coordinate: CLLocationCoordinate2D?
     weak var delegate: NoteDetailsViewControllerDelegate?
     
     // MARK: - Initialization
@@ -74,7 +75,6 @@ class NoteDetailsViewController: UIViewController {
         title = action.title
         
         titleTextField.text = action.note?.title
-        //tagsLabel.text = note.tags?.joined(separator: ", ")
         creationDateLabel.text = (action.note?.creationDate as Date?)?.toLocaleString() ?? "---"
         lastSeenDateLabel.text = (action.note?.lastSeenDate as Date?)?.toLocaleString() ?? "---"
         textView.text = action.note?.text ?? "Introduzca texto"
@@ -90,6 +90,17 @@ class NoteDetailsViewController: UIViewController {
             
             if let image = imageView.image, let data = image.pngData() {
                 note.image = NSData(data: data)
+            }
+            
+            if let coordinate = coordinate {
+                if let location = note.location {
+                    location.longitude = coordinate.longitude
+                    location.latitude = coordinate.latitude
+                } else {
+                    note.location = Location(context: managedContext)
+                    note.location?.longitude = coordinate.longitude
+                    note.location?.latitude = coordinate.latitude
+                }
             }
         }
         
@@ -173,6 +184,22 @@ class NoteDetailsViewController: UIViewController {
         
         present(imagePicker, animated: true, completion: nil)
     }
+    
+    // MARK: - Maps
+    @IBAction func openMap(_ sender: Any) {
+        var location: Location?
+        switch(action) {
+        case .edit(let note):
+            location = note.location
+            
+        case .new:
+            location = nil
+        }
+        let mapViewController = NoteMapViewController(location: location)
+        mapViewController.delegate = self
+        
+        self.navigationController?.pushViewController(mapViewController, animated: true)
+    }
 }
 
 // MARK: - Custom Action
@@ -224,5 +251,12 @@ extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigati
     
     private func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
         return input.rawValue
+    }
+}
+
+// MARK: - Location change
+extension NoteDetailsViewController: NoteMapViewControllerDelegate {
+    func didChangeLocation(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
     }
 }
