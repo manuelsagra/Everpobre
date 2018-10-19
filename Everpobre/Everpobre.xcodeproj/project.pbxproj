@@ -37,6 +37,7 @@
 		32FF1EE3217A2940002B27BB /* NotesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EE1217A2940002B27BB /* NotesMapViewController.swift */; };
 		32FF1EE4217A2940002B27BB /* NotesMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FF1EE2217A2940002B27BB /* NotesMapViewController.xib */; };
 		32FF1EE6217A3362002B27BB /* NotesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EE5217A3362002B27BB /* NotesTabBarController.swift */; };
+		32FF1EE8217A5372002B27BB /* NoteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		32FF1EE1217A2940002B27BB /* NotesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesMapViewController.swift; sourceTree = "<group>"; };
 		32FF1EE2217A2940002B27BB /* NotesMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesMapViewController.xib; sourceTree = "<group>"; };
 		32FF1EE5217A3362002B27BB /* NotesTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTabBarController.swift; sourceTree = "<group>"; };
+		32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				329330C421751C380043C760 /* Notebook+CoreDataProperties.swift */,
 				329330C521751C380043C760 /* Note+CoreDataClass.swift */,
 				324C756C21792817008915A4 /* Note+CoreDataProperties.swift */,
+				32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				324C755B21754567008915A4 /* Animator.swift in Sources */,
 				32E6D549216BF1F7004A24F7 /* NotebookListViewController.swift in Sources */,
+				32FF1EE8217A5372002B27BB /* NoteAnnotation.swift in Sources */,
 				3293309F216D2FB50043C760 /* Date+Utils.swift in Sources */,
 				329330BC216FFE630043C760 /* NotesCollectionViewController.swift in Sources */,
 				324C757621792B33008915A4 /* Location+CoreDataProperties.swift in Sources */,

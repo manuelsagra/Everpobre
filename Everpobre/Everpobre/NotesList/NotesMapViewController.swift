@@ -43,6 +43,7 @@ class NotesMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
         updateAnnotations()
     }
     
@@ -54,11 +55,8 @@ class NotesMapViewController: UIViewController {
     private func updateAnnotations() {
         var annotations: [MKPointAnnotation] = []
         for note in notes {
-            if let location = note.location {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
-                annotation.title = note.title
-                
+            if note.location != nil {
+                let annotation = NoteAnnotation(with: note)                
                 annotations.append(annotation)
             }
         }
@@ -66,6 +64,18 @@ class NotesMapViewController: UIViewController {
         if let mapView = mapView, annotations.count > 0 {
             mapView.layoutMargins = UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
             mapView.showAnnotations(annotations, animated: true)
+        }
+    }
+}
+
+// MARK: - Note click
+extension NotesMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if let annotation = view.annotation as? NoteAnnotation {
+            let note = annotation.note
+            let noteView = NoteDetailsViewController(action: .edit(note), managedContext: coreDataStack.managedContext)
+            noteView.delegate = tabBarController as! NotesTabBarController
+            self.navigationController?.pushViewController(noteView, animated: true)
         }
     }
 }

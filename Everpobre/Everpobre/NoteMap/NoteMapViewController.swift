@@ -19,7 +19,9 @@ class NoteMapViewController: UIViewController {
     
     // MARK: - Properties
     var location: Location?
+    var currentLocation: CLLocation?
     weak var delegate: NoteMapViewControllerDelegate?
+    let locationManager = CLLocationManager()
     
     // MARK: - Initialization
     init(location: Location?) {
@@ -37,25 +39,30 @@ class NoteMapViewController: UIViewController {
         
         title = "Localización"
         
-        var initialLocation: CLLocationCoordinate2D
         if let location = location {
-            initialLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+            let initialLocation = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
             addAnnotation(coordinate: initialLocation)
+            centerMap(at: initialLocation)
         } else {
-            // TODO: Localize user position
-            initialLocation = CLLocationCoordinate2D(latitude: 40.4192500, longitude: -3.6932700)
+            // Locate user
+            if CLLocationManager.locationServicesEnabled() {
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.delegate = self
+                locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                locationManager.startUpdatingLocation()
+            }
         }
-        
+    }
+    
+    private func centerMap(at coordinate: CLLocationCoordinate2D) {
         let regionRadius: CLLocationDistance = 1000
         
         let region = MKCoordinateRegion(
-            center: initialLocation,
+            center: coordinate,
             latitudinalMeters: regionRadius,
             longitudinalMeters: 1000)
         
         mapView.setRegion(region, animated: true)
-        
-        mapView.delegate = self
     }
     
     private func addAnnotation(coordinate: CLLocationCoordinate2D) {
@@ -76,11 +83,17 @@ class NoteMapViewController: UIViewController {
         
         addAnnotation(coordinate: coordinate)
     }
-    
-    // TODO: Remove location
 }
 
-
-extension NoteMapViewController: MKMapViewDelegate {
-
+// MARK: - User Location
+extension NoteMapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defer { currentLocation = locations.last }
+        
+        if currentLocation == nil {
+            if let userLocation = locations.last {
+                centerMap(at: userLocation.coordinate)
+            }
+        }
+    }
 }

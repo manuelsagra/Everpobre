@@ -78,11 +78,9 @@ extension NotesCollectionViewController: UICollectionViewDataSource {
 extension NotesCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let note = notes[indexPath.row]
-        let view = NoteDetailsViewController(action: .edit(note), managedContext: coreDataStack.managedContext)
-        view.delegate = tabBarController as! NotesTabBarController
-        
-        //self.navigationController?.transitioningDelegate = self
-        self.navigationController?.pushViewController(view, animated: true)
+        let noteView = NoteDetailsViewController(action: .edit(note), managedContext: coreDataStack.managedContext)
+        noteView.delegate = tabBarController as! NotesTabBarController
+        self.navigationController?.pushViewController(noteView, animated: true)
     }
 }
 

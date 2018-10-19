@@ -63,53 +63,21 @@ class NotesTabBarController: UITabBarController {
     }
     
     @objc private func exportNotes() {
-        coreDataStack.storeContainer.performBackgroundTask { [unowned self] context in
-            var results: [Note] = []
-            do {
-                results = try self.coreDataStack.managedContext.fetch(self.notesFetchRequest(from: self.notebook))
-                
-            } catch let error as NSError {
-                print("Error: \(error.localizedDescription)")
-            }
+        var results: [Note] = []
+        do {
+            results = try self.coreDataStack.managedContext.fetch(self.notesFetchRequest(from: self.notebook))
             
-            let exportPath = NSTemporaryDirectory() + "export.csv"
-            let exportURL = URL(fileURLWithPath: exportPath)
-            FileManager.default.createFile(atPath: exportPath, contents: Data(), attributes: nil)
-            
-            let fileHandle: FileHandle?
-            do {
-                fileHandle = try FileHandle(forWritingTo: exportURL)
-            } catch let error as NSError {
-                print("Error: \(error.localizedDescription)")
-                fileHandle = nil
-            }
-            
-            if let fileHandle = fileHandle {
-                for note in results {
-                    fileHandle.seekToEndOfFile()
-                    guard let csv = note.csv().data(using: .utf8, allowLossyConversion: false) else { break }
-                    fileHandle.write(csv)
-                    fileHandle.write("\n".data(using: .utf8)!)
-                }
-                
-                fileHandle.closeFile()
-                
-                DispatchQueue.main.async {
-                    let message = "Las notas se han exportado en \(exportPath)"
-                    let alertController = UIAlertController(
-                        title: "Exportación",
-                        message: message,
-                        preferredStyle: .alert
-                    )
-                    let dismissAction = UIAlertAction(title: "Aceptar", style: .default)
-                    alertController.addAction(dismissAction)
-                    
-                    self.present(alertController, animated: true)
-                }
-            } else {
-                print("Error al exportar")
-            }
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
         }
+        
+        var csv = ""
+        for note in results {
+            csv = "\(csv)\(note.csv())\n"
+        }
+        
+        let activityView = UIActivityViewController(activityItems: [csv], applicationActivities: nil)
+        self.present(activityView, animated: true)
     }
     
     // Unneeded really, just for demostration purproses

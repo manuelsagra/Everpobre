@@ -22,6 +22,9 @@ class NotebookListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportNotebooks))
+        navigationItem.rightBarButtonItem = exportButtonItem
+        
         configureSearchController()
         reloadView()
     }
@@ -83,7 +86,7 @@ class NotebookListViewController: UIViewController {
     }
     
     @IBAction func addNotebook(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Nuevo Notebook", message: "Nombre", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Nueva libreta", message: "Nombre", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Grabar", style: .default) { [unowned self] action in
             guard
                 let textField = alert.textFields?.first,
@@ -108,6 +111,24 @@ class NotebookListViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true)
+    }
+    
+    @objc private func exportNotebooks() {
+        var results: [Notebook] = []
+        do {
+            results = try self.coreDataStack.managedContext.fetch(Notebook.fetchRequest())
+            
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        
+        var csv = ""
+        for notebook in results {
+            csv = "\(csv)\(notebook.csv())\n"
+        }
+        
+        let activityView = UIActivityViewController(activityItems: [csv], applicationActivities: nil)
+        self.present(activityView, animated: true)
     }
 }
 
