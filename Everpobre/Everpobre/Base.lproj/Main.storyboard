@@ -112,13 +112,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Libretas" largeTitleDisplayMode="always" id="4rX-6X-sVw">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="x7w-aB-MeZ">
-                            <connections>
-                                <action selector="addNotebook:" destination="BYZ-38-t0r" id="Ite-5m-Lbk"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Libretas" largeTitleDisplayMode="always" id="4rX-6X-sVw"/>
                     <connections>
                         <outlet property="tableView" destination="9sI-Ys-8yA" id="eBR-1P-Q1P"/>
                         <outlet property="totalLabel" destination="h0c-rE-vJI" id="c4E-Kp-cdU"/>

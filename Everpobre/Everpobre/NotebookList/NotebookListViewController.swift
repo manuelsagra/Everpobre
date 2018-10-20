@@ -23,7 +23,8 @@ class NotebookListViewController: UIViewController {
         super.viewDidLoad()
         
         let exportButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(exportNotebooks))
-        navigationItem.rightBarButtonItem = exportButtonItem
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNotebook))
+        navigationItem.rightBarButtonItems = [addButtonItem, exportButtonItem]
         
         configureSearchController()
         reloadView()
@@ -41,7 +42,7 @@ class NotebookListViewController: UIViewController {
         
         return NSFetchedResultsController(fetchRequest: fetchRequest,
                                           managedObjectContext: coreDataStack.managedContext,
-                                          sectionNameKeyPath: #keyPath(Notebook.creationDate),
+                                          sectionNameKeyPath: #keyPath(Notebook.section),
                                           cacheName: nil)
     }
     
@@ -95,6 +96,7 @@ class NotebookListViewController: UIViewController {
             
             let notebook = Notebook(context: self.coreDataStack.managedContext)
             notebook.name = nameToSave
+            notebook.section = String(nameToSave.prefix(1)).uppercased()
             notebook.creationDate = NSDate()
             
             do {

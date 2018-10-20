@@ -25,7 +25,6 @@
 		329330C02170019C0043C760 /* NotesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329330BE2170019C0043C760 /* NotesCollectionViewCell.swift */; };
 		329330C12170019C0043C760 /* NotesCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329330BF2170019C0043C760 /* NotesCollectionViewCell.xib */; };
 		329330C721751C380043C760 /* Notebook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329330C321751C380043C760 /* Notebook+CoreDataClass.swift */; };
-		329330C821751C380043C760 /* Notebook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329330C421751C380043C760 /* Notebook+CoreDataProperties.swift */; };
 		329330C921751C380043C760 /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329330C521751C380043C760 /* Note+CoreDataClass.swift */; };
 		32E6D533216BEFED004A24F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E6D532216BEFED004A24F7 /* AppDelegate.swift */; };
 		32E6D538216BEFED004A24F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E6D536216BEFED004A24F7 /* Main.storyboard */; };
@@ -38,6 +37,7 @@
 		32FF1EE4217A2940002B27BB /* NotesMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32FF1EE2217A2940002B27BB /* NotesMapViewController.xib */; };
 		32FF1EE6217A3362002B27BB /* NotesTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EE5217A3362002B27BB /* NotesTabBarController.swift */; };
 		32FF1EE8217A5372002B27BB /* NoteAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */; };
+		32FF1EEC217A7A5E002B27BB /* Notebook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF1EEA217A7A5E002B27BB /* Notebook+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +61,6 @@
 		329330BF2170019C0043C760 /* NotesCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCollectionViewCell.xib; sourceTree = "<group>"; };
 		329330C221751AF20043C760 /* Everpobre v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Everpobre v2.xcdatamodel"; sourceTree = "<group>"; };
 		329330C321751C380043C760 /* Notebook+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataClass.swift"; sourceTree = "<group>"; };
-		329330C421751C380043C760 /* Notebook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		329330C521751C380043C760 /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
 		32E6D52F216BEFEC004A24F7 /* Everpobre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Everpobre.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32E6D532216BEFED004A24F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		32FF1EE2217A2940002B27BB /* NotesMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesMapViewController.xib; sourceTree = "<group>"; };
 		32FF1EE5217A3362002B27BB /* NotesTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTabBarController.swift; sourceTree = "<group>"; };
 		32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteAnnotation.swift; sourceTree = "<group>"; };
+		32FF1EEA217A7A5E002B27BB /* Notebook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notebook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +170,7 @@
 				324C757321792B33008915A4 /* Location+CoreDataClass.swift */,
 				324C757421792B33008915A4 /* Location+CoreDataProperties.swift */,
 				329330C321751C380043C760 /* Notebook+CoreDataClass.swift */,
-				329330C421751C380043C760 /* Notebook+CoreDataProperties.swift */,
+				32FF1EEA217A7A5E002B27BB /* Notebook+CoreDataProperties.swift */,
 				329330C521751C380043C760 /* Note+CoreDataClass.swift */,
 				324C756C21792817008915A4 /* Note+CoreDataProperties.swift */,
 				32FF1EE7217A5372002B27BB /* NoteAnnotation.swift */,
@@ -274,9 +274,9 @@
 				3293309F216D2FB50043C760 /* Date+Utils.swift in Sources */,
 				329330BC216FFE630043C760 /* NotesCollectionViewController.swift in Sources */,
 				324C757621792B33008915A4 /* Location+CoreDataProperties.swift in Sources */,
-				329330C821751C380043C760 /* Notebook+CoreDataProperties.swift in Sources */,
 				32E6D533216BEFED004A24F7 /* AppDelegate.swift in Sources */,
 				329330C02170019C0043C760 /* NotesCollectionViewCell.swift in Sources */,
+				32FF1EEC217A7A5E002B27BB /* Notebook+CoreDataProperties.swift in Sources */,
 				324C755821753BCC008915A4 /* UIImage+ReSize.swift in Sources */,
 				32E6D54B216BFB05004A24F7 /* NotebookListCell.swift in Sources */,
 				324C757521792B33008915A4 /* Location+CoreDataClass.swift in Sources */,

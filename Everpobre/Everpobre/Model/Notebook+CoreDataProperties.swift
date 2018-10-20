@@ -2,7 +2,7 @@
 //  Notebook+CoreDataProperties.swift
 //  Everpobre
 //
-//  Created by Manuel Sagra de Diego on 15/10/18.
+//  Created by Manuel Sagra de Diego on 19/10/18.
 //  Copyright © 2018 Ibermutuamur. All rights reserved.
 //
 //
@@ -19,6 +19,7 @@ extension Notebook {
 
     @NSManaged public var creationDate: NSDate?
     @NSManaged public var name: String?
+    @NSManaged public var section: String?
     @NSManaged public var notes: NSOrderedSet?
 
 }

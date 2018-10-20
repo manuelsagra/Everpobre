@@ -18,11 +18,12 @@
     <entity name="Notebook" representedClassName="Notebook" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="section" optional="YES" attributeType="String" maxValueString="1" defaultValueString="-" syncable="YES"/>
         <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Note" inverseName="notebook" inverseEntity="Note" syncable="YES"/>
     </entity>
     <elements>
         <element name="Location" positionX="162" positionY="162" width="128" height="90"/>
         <element name="Note" positionX="338.47265625" positionY="140.01171875" width="128" height="165"/>
-        <element name="Notebook" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Notebook" positionX="-54" positionY="18" width="128" height="105"/>
     </elements>
 </model>
