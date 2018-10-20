@@ -24,3 +24,19 @@ extension Note {
         return "\(exportedCreationDate),\(exportedTitle),\(exportedText)"
     }
 }
+
+enum Tag: Int16, CaseIterable, CustomStringConvertible {
+    case Personal   = 1
+    case TODO       = 2
+    case Info       = 3
+    case Otros      = 4
+    
+    var description: String {
+        switch self {
+        case .Personal: return "Personal"
+        case .TODO: return "TODO"
+        case .Info: return "Info"
+        case .Otros: return "Otros"
+        }
+    }
+}

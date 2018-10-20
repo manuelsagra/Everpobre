@@ -15,6 +15,7 @@
                 <outlet property="creationDateLabel" destination="X95-kT-1dP" id="gLY-v7-56a"/>
                 <outlet property="imageView" destination="Fda-m2-93s" id="9fI-nh-Scn"/>
                 <outlet property="lastSeenDateLabel" destination="bE2-3u-dPf" id="U7t-eY-wPl"/>
+                <outlet property="tagTextField" destination="oXv-LY-krX" id="4LW-pG-aPT"/>
                 <outlet property="textView" destination="SwD-bT-b14" id="Aoy-rl-efZ"/>
                 <outlet property="titleTextField" destination="vwd-Is-mvc" id="5gD-oO-WyP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -76,7 +77,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nyt-sX-yX5" userLabel="Tags">
                                             <rect key="frame" x="0.0" y="114" width="220.5" height="17"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Etiquetas:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-RN-3gF" userLabel="Tags:">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Etiqueta:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKc-RN-3gF" userLabel="Tags:">
                                                     <rect key="frame" x="0.0" y="0.0" width="112.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -90,6 +91,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="tagClick:" destination="-1" eventType="touchDown" id="UcN-Qa-dpu"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </stackView>

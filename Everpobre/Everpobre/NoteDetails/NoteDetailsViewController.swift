@@ -21,6 +21,7 @@ class NoteDetailsViewController: UIViewController {
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet weak var lastSeenDateLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var tagTextField: UITextField!
     
     // MARK: - Properties
     enum Action {
@@ -32,6 +33,7 @@ class NoteDetailsViewController: UIViewController {
     let action: Action
     
     var coordinate: CLLocationCoordinate2D?
+    var tagId: Int16?
     weak var delegate: NoteDetailsViewControllerDelegate?
     
     // MARK: - Initialization
@@ -48,6 +50,12 @@ class NoteDetailsViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tagPicker = UIPickerView()
+        tagTextField.inputView = tagPicker
+        tagPicker.dataSource = self
+        tagPicker.delegate = self
+        
         configure()
     }
     
@@ -75,6 +83,9 @@ class NoteDetailsViewController: UIViewController {
         title = action.title
         
         titleTextField.text = action.note?.title
+        if let tag = action.note?.tag, tag != 0 {
+            tagTextField.text = Tag(rawValue: tag)?.description
+        }
         creationDateLabel.text = (action.note?.creationDate as Date?)?.toLocaleString() ?? "---"
         lastSeenDateLabel.text = (action.note?.lastSeenDate as Date?)?.toLocaleString() ?? "---"
         textView.text = action.note?.text ?? "Introduzca texto"
@@ -87,6 +98,9 @@ class NoteDetailsViewController: UIViewController {
         func addProperties(to note: Note) {
             note.title = titleTextField.text
             note.text = textView.text
+            if let tag = tagId {
+                note.tag = tag
+            }
             
             if let image = imageView.image, let data = image.pngData() {
                 note.image = NSData(data: data)
@@ -200,6 +214,11 @@ class NoteDetailsViewController: UIViewController {
         
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
+    
+    // MARK: - Tags
+    @IBAction func tagClick(_ sender: Any) {
+        print("TAG")
+    }
 }
 
 // MARK: - Custom Action
@@ -258,5 +277,27 @@ extension NoteDetailsViewController: UIImagePickerControllerDelegate, UINavigati
 extension NoteDetailsViewController: NoteMapViewControllerDelegate {
     func didChangeLocation(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
+    }
+}
+
+// MARK: - Tag Picker
+extension NoteDetailsViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return Tag.allCases.count
+    }    
+}
+
+extension NoteDetailsViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Tag.allCases[row].description
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        tagTextField.text = Tag.allCases[row].description
+        tagId = Tag.allCases[row].rawValue
     }
 }
