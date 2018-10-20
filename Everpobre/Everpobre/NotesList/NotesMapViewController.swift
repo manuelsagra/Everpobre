@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreData
 
 class NotesMapViewController: UIViewController {
     // MARK: - Outlets
@@ -16,18 +17,13 @@ class NotesMapViewController: UIViewController {
     // MARK: - Properties
     let notebook: Notebook
     let coreDataStack: CoreDataStack
-    
-    var notes: [Note] = [] {
-        didSet {
-            updateAnnotations()
-        }
-    }
+    var fetchedResultsController: NSFetchedResultsController<Note>
     
     // MARK: - Initialization
-    init(notebook: Notebook, coreDataStack: CoreDataStack) {
+    init(notebook: Notebook, coreDataStack: CoreDataStack, fetchedResultsController: NSFetchedResultsController<Note>) {
         self.notebook = notebook
-        self.notes = (notebook.notes?.array as? [Note]) ?? []
         self.coreDataStack = coreDataStack
+        self.fetchedResultsController = fetchedResultsController
         
         super.init(nibName: nil, bundle: nil)
         
@@ -47,17 +43,15 @@ class NotesMapViewController: UIViewController {
         updateAnnotations()
     }
     
-    func update(with notes: [Note]) {
-        self.notes = notes
-    }
-    
     // MARK: - Annotations
-    private func updateAnnotations() {
+    func updateAnnotations() {
         var annotations: [MKPointAnnotation] = []
-        for note in notes {
-            if note.location != nil {
-                let annotation = NoteAnnotation(with: note)                
-                annotations.append(annotation)
+        if let notes = fetchedResultsController.fetchedObjects {
+            for note in notes {
+                if note.location != nil {
+                    let annotation = NoteAnnotation(with: note)
+                    annotations.append(annotation)
+                }
             }
         }
         

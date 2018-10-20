@@ -214,11 +214,6 @@ class NoteDetailsViewController: UIViewController {
         
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
-    
-    // MARK: - Tags
-    @IBAction func tagClick(_ sender: Any) {
-        print("TAG")
-    }
 }
 
 // MARK: - Custom Action

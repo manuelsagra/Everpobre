@@ -65,7 +65,7 @@ class NotebookListViewController: UIViewController {
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         search.obscuresBackgroundDuringPresentation = false
-        search.searchBar.placeholder = "Buscar Notebook"
+        search.searchBar.placeholder = "Buscar libreta"
         
         navigationItem.searchController = search
         navigationItem.hidesSearchBarWhenScrolling = true

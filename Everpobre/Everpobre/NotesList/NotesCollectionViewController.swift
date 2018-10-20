@@ -16,20 +16,15 @@ class NotesCollectionViewController: UIViewController {
     // MARK: - Properties
     let notebook: Notebook
     let coreDataStack: CoreDataStack
-    
-    var notes: [Note] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var fetchedResultsController: NSFetchedResultsController<Note>
     
     let transition = Animator()
 
     // MARK: - Initialization
-    init(notebook: Notebook, coreDataStack: CoreDataStack) {
+    init(notebook: Notebook, coreDataStack: CoreDataStack, fetchedResultsController: NSFetchedResultsController<Note>!) {
         self.notebook = notebook
-        self.notes = (notebook.notes?.array as? [Note]) ?? []
         self.coreDataStack = coreDataStack
+        self.fetchedResultsController = fetchedResultsController
         
         super.init(nibName: nil, bundle: nil)
         
@@ -51,10 +46,6 @@ class NotesCollectionViewController: UIViewController {
         setupCollectionView()
     }
     
-    func update(with notes: [Note]) {
-        self.notes = notes
-    }
-    
     private func setupCollectionView() {
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -64,20 +55,20 @@ class NotesCollectionViewController: UIViewController {
 // MARK: - CollectionView
 extension NotesCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return notes.count
+        return (fetchedResultsController.fetchedObjects?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "NotesCollectionViewCell", for: indexPath) as! NotesCollectionViewCell
         
-        cell.configure(with: notes[indexPath.row])
+        cell.configure(with: fetchedResultsController.object(at: indexPath))
         return cell
     }
 }
 
 extension NotesCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let note = notes[indexPath.row]
+        let note = fetchedResultsController.object(at: indexPath)
         let noteView = NoteDetailsViewController(action: .edit(note), managedContext: coreDataStack.managedContext)
         noteView.delegate = tabBarController as! NotesTabBarController
         self.navigationController?.pushViewController(noteView, animated: true)

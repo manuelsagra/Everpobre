@@ -91,9 +91,6 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="tagClick:" destination="-1" eventType="touchDown" id="UcN-Qa-dpu"/>
-                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </stackView>
