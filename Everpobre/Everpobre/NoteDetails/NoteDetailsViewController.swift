@@ -61,22 +61,20 @@ class NoteDetailsViewController: UIViewController {
     
     // MARK: - Helper Methods
     private func configure() {
+        let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
+        
         switch action {
         case .new:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
             self.navigationItem.rightBarButtonItem = saveButtonItem
             
             let cancelButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelSaveNote))
             self.navigationItem.leftBarButtonItem = cancelButtonItem
-            configureValues()
             
         case .edit:
-            let saveButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveNote))
-            self.navigationItem.rightBarButtonItem = saveButtonItem
-            
-            configureValues()
+            let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(deleteNote))
+            self.navigationItem.rightBarButtonItems = [saveButtonItem, deleteButtonItem]
         }
-        
+        configureValues()
     }
     
     private func configureValues() {
@@ -91,6 +89,24 @@ class NoteDetailsViewController: UIViewController {
         textView.text = action.note?.text ?? "Introduzca texto"
         if let imageData = action.note?.image, imageData.length > 0 {
             imageView.image = UIImage(data: imageData as Data)
+        }
+    }
+    
+    @objc private func deleteNote() {
+        switch action {
+        case .edit(let note):
+            managedContext.delete(note)
+            
+            do {
+                try managedContext.save()
+                delegate?.didChangeNote()
+            } catch let error as NSError {
+                print("TODO Error handling \(error.localizedDescription)")
+            }
+            
+            navigationController?.popViewController(animated: true)
+        case .new:
+            break
         }
     }
 
