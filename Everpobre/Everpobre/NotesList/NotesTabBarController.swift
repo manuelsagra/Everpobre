@@ -151,7 +151,7 @@ extension NotesTabBarController:UISearchResultsUpdating {
     }
     
     private func showFilteredResults(with filter: String) {
-        // Tag lookup
+        // Tag lookup (Naive and slow)
         var tag: Int16 = -1
         let possibleTags = filter.split(separator: " ")
         for possibleTag in possibleTags {

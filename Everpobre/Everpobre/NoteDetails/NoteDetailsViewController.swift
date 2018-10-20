@@ -114,6 +114,7 @@ class NoteDetailsViewController: UIViewController {
         func addProperties(to note: Note) {
             note.title = titleTextField.text
             note.text = textView.text
+            note.lastSeenDate = NSDate()
             if let tag = tagId {
                 note.tag = tag
             }
@@ -135,8 +136,7 @@ class NoteDetailsViewController: UIViewController {
         }
         
         switch action {
-        case .edit(let note):
-            note.lastSeenDate = NSDate()
+        case .edit(let note):            
             addProperties(to: note)
             
             do {
